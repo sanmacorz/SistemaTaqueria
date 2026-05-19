@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -89,6 +90,7 @@ public class SellWindow extends JFrame {
 
     public SellWindow(List<String> itemNames, ProductRepository productRepository) {
         this.itemNames = itemNames == null ? new ArrayList<>() : new ArrayList<>(itemNames);
+        sortItemNamesForDisplay();
         this.productRepository = productRepository;
         if (this.productRepository != null && !this.itemNames.isEmpty()) {
             this.unitPricesByName.putAll(this.productRepository.getUnitPricesByNames(this.itemNames));
@@ -134,6 +136,7 @@ public class SellWindow extends JFrame {
         JButton closeHeader = createHeaderButton("Cerrar");
         closeHeader.setBackground(COLOR_DANGER);
         closeHeader.setForeground(COLOR_BACKGROUND);
+        closeHeader.addActionListener(e -> dispose());
         quickActions.add(closeHeader);
         header.add(quickActions, BorderLayout.EAST);
 
@@ -623,5 +626,25 @@ public class SellWindow extends JFrame {
         normalized = normalized.replaceAll("\\p{M}", "");
         normalized = normalized.toLowerCase();
         return normalized.replaceAll("[^a-z0-9]", "");
+    }
+
+    private void sortItemNamesForDisplay() {
+        itemNames.sort(Comparator
+                .comparingInt(this::displayGroup)
+                .thenComparing(this::normalizeKey));
+    }
+
+    private int displayGroup(String itemName) {
+        String key = normalizeKey(itemName);
+        if (key.contains("taco")) {
+            return 0;
+        }
+        if (key.contains("cocacola")
+                || key.contains("manzana")
+                || key.contains("durazno")
+                || key.contains("ponche")) {
+            return 1;
+        }
+        return 2;
     }
 }

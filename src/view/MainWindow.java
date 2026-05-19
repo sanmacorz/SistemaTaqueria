@@ -80,14 +80,14 @@ public class MainWindow extends JFrame {
         ImageIcon timeIcon = new ImageIcon("src/imgs/clock.png");
         Image timeImage = timeIcon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
         JLabel lbTimeImg = new JLabel(new ImageIcon(timeImage));
-        lbTimeImg.setBounds(1570, 810, 32, 32);
+        lbTimeImg.setBounds(1530, 810, 32, 32);
         this.add(lbTimeImg);
 
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss a");
         JLabel lbTime = new JLabel();
         lbTime.setForeground(COLOR_TEXT);
         lbTime.setFont(new Font("SansSerif", Font.BOLD, 24));
-        lbTime.setBounds(1610, 806, 280, 40);
+        lbTime.setBounds(1570, 806, 320, 40);
         this.add(lbTime);
         Timer clockTimer = new Timer(1000, e -> lbTime.setText(LocalDateTime.now().format(timeFormat)));
         clockTimer.setInitialDelay(0);

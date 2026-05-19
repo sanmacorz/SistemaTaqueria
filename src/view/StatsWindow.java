@@ -521,6 +521,7 @@ public class StatsWindow extends JFrame {
         footer.add(status, BorderLayout.WEST);
 
         JLabel hint = createMutedLabel("Aplique filtros y genere el CSV");
+        hint.setBorder(new EmptyBorder(0, 12, 0, 0));
         footer.add(hint, BorderLayout.CENTER);
 
         JLabel time = createMutedLabel("--:--");

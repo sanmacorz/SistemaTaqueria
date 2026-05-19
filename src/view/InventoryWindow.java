@@ -171,6 +171,7 @@ public class InventoryWindow extends JFrame {
 
         JLabel hint = new JLabel("Seleccione un producto y use AUMENTAR / DISMINUIR");
         hint.setForeground(COLOR_MUTED);
+        hint.setBorder(new EmptyBorder(0, 12, 0, 0));
         footer.add(hint, BorderLayout.CENTER);
 
         JLabel time = new JLabel("--:--");
